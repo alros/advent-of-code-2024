@@ -4,7 +4,7 @@ import advent2024.utils.Utils
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class TestDay1 {
+class TestDay01 {
 
     @Test
     fun testExamplePhase1() {
