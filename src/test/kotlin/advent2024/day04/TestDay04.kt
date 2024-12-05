@@ -35,7 +35,7 @@ class TestDay04 {
     @Test
     fun testPhase2() {
         val input = Utils.readFile("day04", "actualInput.txt")
-        Assertions.assertEquals(2034, solveStep2(input))//low
+        Assertions.assertEquals(2034, solveStep2(input))
     }
 
 }
