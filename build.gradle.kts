@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    //implementation("com.madgag:gifwriter:1.0.0")
+    implementation("com.madgag:animated-gif-lib:1.4")
     testImplementation(kotlin("test"))
 }
 
