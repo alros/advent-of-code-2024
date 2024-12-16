@@ -118,12 +118,17 @@ private fun solveStep(input: String, size: Int, render: Boolean = false): Long {
     val mapSize = parsedInput.mapSize
 
     val gifEncoder = if (render) initPrint() else null
-    for ((index, movement) in parsedInput.movements.withIndex()) {
+    var lastPercentage = -1
+    for ((iteration, movement) in parsedInput.movements.withIndex()) {
+        if ((100 * iteration / parsedInput.movements.size)!=lastPercentage) {
+            lastPercentage = 100 * iteration / parsedInput.movements.size
+            println("${lastPercentage}%")
+        }
         val mov = Movement.fromCh(movement)
         robot.move(map, mov)
-        if (render) {
+        if (render && iteration < 600) {
             var mapStr = mapToString(mov, map, mapSize)
-            addFrame(gifEncoder!!, mapStr, index.toString())
+            addFrame(gifEncoder!!, mapStr, iteration.toString())
         }
     }
 
@@ -192,7 +197,7 @@ fun initPrint(): AnimatedGifEncoder {
     val gifEncoder = AnimatedGifEncoder()
     gifEncoder.setQuality(1)
     gifEncoder.start(FileOutputStream(File("render/day15.gif")))
-    gifEncoder.setDelay(100)
+    gifEncoder.setDelay(25)
     gifEncoder.setRepeat(0)
     return gifEncoder
 }
