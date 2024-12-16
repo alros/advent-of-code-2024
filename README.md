@@ -10,7 +10,7 @@
 
 The solution of [Day14](render/day14.txt)
 
-First 1000 movements of [Day15](render/day15compressed.gif) compressed with
+First 600 movements of [Day15](render/day15compressed.gif) compressed with
 ```bash
 gifsicle -i day15.gif -O3 --colors 10 -o day15compressed.gif
 ```
