@@ -193,7 +193,7 @@ private fun convertInput(input: String, size: Int): Input {
 
 //down here, it's all just to produce a gif
 
-fun initPrint(): AnimatedGifEncoder {
+private fun initPrint(): AnimatedGifEncoder {
     val gifEncoder = AnimatedGifEncoder()
     gifEncoder.setQuality(1)
     gifEncoder.start(FileOutputStream(File("render/day15.gif")))
