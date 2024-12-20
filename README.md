@@ -18,6 +18,8 @@ First 600 movements of [Day15](render/day15compressed.gif) compressed with
 gifsicle -i day15.gif -O3 --colors 10 -o day15compressed.gif
 ```
 
+Solution of [Day20 part 1](render/day20.gif)
+
 # In progress 😅
 
 - day 16, part 2: I need to fix the costs in the longer loops..
