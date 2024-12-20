@@ -1,7 +1,7 @@
 # Advent Of Code 2024 🎄
 
-![Stars](https://img.shields.io/badge/stars%20⭐-36-yellow)
-![Days Completed](https://img.shields.io/badge/days%20completed-17-green)
+![Stars](https://img.shields.io/badge/stars%20⭐-38-yellow)
+![Days Completed](https://img.shields.io/badge/days%20completed-18-green)
 ![Days Partially Completed](https://img.shields.io/badge/days%20partially%20completed-2-silver)
 
 [Advent of Code](https://adventofcode.com) is an Advent calendar of small programming puzzles for a variety of skill
