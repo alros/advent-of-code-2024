@@ -1,20 +1,20 @@
 package advent2024.day20
 
+import advent2024.utils.FindPath
+import advent2024.utils.FindPath.Companion.populateDistancesFromStartToEnd
 import com.madgag.gif.fmsware.AnimatedGifEncoder
 import java.awt.BasicStroke
 import java.awt.Color
-import java.awt.Stroke
 import java.awt.image.BufferedImage
 import java.io.File
 import java.io.FileOutputStream
 import java.security.SecureRandom
 import java.util.stream.Stream
 import kotlin.math.abs
-import kotlin.random.Random
 
 fun solveStep1(input: String, accept: (Int) -> Boolean): Int {
     val map = convertInput(input)
-    calculateWeights(map)
+    populateDistancesFromStartToEnd(map.map, map.start, map.end)
     return findCheats(map, accept) { i: Int, j: Int ->
         listOf(Pair(i + 2, j), Pair(i - 2, j), Pair(i, j - 2), Pair(i, j + 2)).stream()
     }
@@ -22,7 +22,7 @@ fun solveStep1(input: String, accept: (Int) -> Boolean): Int {
 
 fun solveStep2(input: String, accept: (Int) -> Boolean): Int {
     val map = convertInput(input)
-    calculateWeights(map)
+    populateDistancesFromStartToEnd(map.map, map.start, map.end)
     return findCheats(map, accept) { i: Int, j: Int ->
         var candidates = mutableSetOf<Pair<Int, Int>>()
         for (y in 0..20) {
@@ -39,7 +39,7 @@ fun solveStep2(input: String, accept: (Int) -> Boolean): Int {
     }
 }
 
-class Map(val map: List<IntArray>, val start: Pair<Int, Int>, val end: Pair<Int, Int>)
+class Map(val map: Array<IntArray>, val start: Pair<Int, Int>, val end: Pair<Int, Int>)
 
 private fun convertInput(input: String): Map {
     var map = input.split("\n").stream()
@@ -67,31 +67,7 @@ private fun convertInput(input: String): Map {
         }
     }
     map[start!!.first][start!!.second] = 0
-    return Map(map, start!!, end!!)
-}
-
-fun calculateWeights(mapConf: Map): Int {
-    var end = mapConf.end
-    val map = mapConf.map
-    var candidates = listOf(mapConf.start)
-    val moves = listOf(Pair(1, 0), Pair(-1, 0), Pair(0, 1), Pair(0, -1))
-    while (true) {
-        val newCandidates = mutableListOf<Pair<Int, Int>>()
-        for (candidate in candidates) {
-            var cCost = map[candidate.first][candidate.second]
-            if (candidate == end) {
-                return cCost
-            }
-            cCost++
-            moves.stream()
-                .map { Pair(candidate.first + it.first, candidate.second + it.second) }
-                .filter { map[it.first][it.second] != -1 }
-                .filter { map[it.first][it.second] > cCost }
-                .peek { map[it.first][it.second] = cCost }
-                .forEach { newCandidates.add(it) }
-        }
-        candidates = newCandidates
-    }
+    return Map(Array(map.size) { i -> map[i] }, start!!, end!!)
 }
 
 fun findCheats(mapConf: Map, accept: (Int) -> Boolean, cheatStream: (i: Int, j: Int) -> Stream<Pair<Int, Int>>): Int {
